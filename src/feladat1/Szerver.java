@@ -1,4 +1,4 @@
-package com.company;
+package feladat1;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -15,13 +15,26 @@ public class Szerver {
             Socket kapcsolat = socket.accept();
             DataInputStream klienstol = new DataInputStream(kapcsolat.getInputStream());
             DataOutputStream kliensnek = new DataOutputStream(kapcsolat.getOutputStream());
-            InetAddress kliens = kapcsolat.getInetAddress();
-            System.out.println("Az ügyfél neve: " + kliens.getHostName());
-            System.out.println("Az ügyfél címe: " + kliens.getHostAddress());
+
+            while (true) {
+                int sugar = klienstol.readInt();
+                kliensnek.writeDouble(korKerulete(sugar));
+                kliensnek.writeDouble(korTerulete(sugar));
+                kliensnek.flush();
+            }
         }
         catch (IOException e) {
             System.out.println(e);
         }
+    }
+
+    private static double korKerulete(int sugar) {
+        return 2 * sugar * Math.PI;
+    }
+
+
+    private static double korTerulete(int sugar) {
+        return sugar * sugar * Math.PI;
     }
 
 }
