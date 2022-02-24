@@ -1,4 +1,4 @@
-package feladat2;
+package feladat02;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
